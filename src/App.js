@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AnimalShow from './AnimalShow';
 
 function getRandomAnimal() {
     const animals = ['bird', 'cat', 'cow', 'dog', 'gator', 'horse'];
@@ -10,13 +11,18 @@ function App() {
     // eslint-disable-next-line no-undef
     const [animals, setAnimals] = useState([]);
 
+    const renderAnimals = animals.map((animal, index) => {
+            return <AnimalShow key={index} type={animal} />
+    });
+
     const hanldeClick = () => {
-        console.log('clicked');
-        setAnimals([...animals, getRandomAnimal()]);    }
+        setAnimals([...animals, getRandomAnimal()]);    
+    }
+
     return (
         <div>
             <button onClick={hanldeClick}>Add Animal</button>
-            <h1>{animals}</h1>
+            <h1>{renderAnimals}</h1>
         </div>
     );
 }
